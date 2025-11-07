@@ -41,7 +41,7 @@ const Register = () => {
     if (validate()) {
       try {
         const newUser = {
-          username: name.replace(/\s/g, ''),
+          username: name.replace(/\s/g, '').toLowerCase(),
           email,
           password,
         };
@@ -63,7 +63,11 @@ const Register = () => {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           console.error(err.response.data);
-          setServerError(err.response.data.message || 'An error occurred during registration.');
+          if (err.response.data.message && err.response.data.message.includes('inappropriate content')) {
+            setServerError('Username is invalid. Please try a different username (e.g., all lowercase).');
+          } else {
+            setServerError(err.response.data.message || 'An error occurred during registration.');
+          }
         } else {
           // Something happened in setting up the request that triggered an Error
           console.error('Error', err.message);
