@@ -41,7 +41,7 @@ const Register = () => {
     if (validate()) {
       try {
         const newUser = {
-          username: name,
+          username: name.replace(/\s/g, ''),
           email,
           password,
         };
