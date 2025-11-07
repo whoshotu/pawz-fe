@@ -41,11 +41,16 @@ const Register = () => {
     if (validate()) {
       try {
         const newUser = {
-          username: name.replace(/\s/g, '').toLowerCase(),
           email,
           password,
+          options: {
+            data: {
+              username: name.replace(/\s/g, '').toLowerCase(),
+              full_name: name,
+            }
+          }
         };
-        console.log('Attempting to register with:', newUser);
+        console.log('Attempting to register with:', { email, password, username: newUser.options.data.username });
 
         const res = await api.post('/auth/signup', newUser); // Use api object
         console.log('Registration successful, response:', res);
