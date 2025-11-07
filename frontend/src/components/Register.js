@@ -47,7 +47,7 @@ const Register = () => {
         };
         console.log('Attempting to register with:', newUser);
 
-        const res = await api.post('/users', newUser); // Use api object
+        const res = await api.post('/auth/signup', newUser); // Use api object
         console.log('Registration successful, response:', res);
 
         if (res) {
