@@ -55,11 +55,15 @@ const Register = () => {
         const res = await api.post('/auth/signup', newUser); // Use api object
         console.log('Registration successful, response:', res);
 
-        if (res) {
-          login(res.data); // Log the user in immediately
-          navigate('/'); // Redirect to home page on success
+        if (res && res.data && res.data.user && res.data.session) {
+          const userData = {
+            ...res.data.user,
+            token: res.data.session.access_token
+          };
+          login(userData); // Log the user in immediately
+          navigate('/dashboard'); // Redirect to dashboard on success
         } else {
-          console.error('API response is undefined');
+          console.error('API response is undefined or missing user/session data');
           setServerError('An unexpected error occurred during registration.');
         }
       } catch (err) {

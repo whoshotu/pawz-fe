@@ -44,7 +44,7 @@ const Profile = () => {
               <Typography variant="h4">{profile.username}</Typography>
               <Typography variant="body1">{profile.bio}</Typography>
             </Box>
-            {user._id === profile._id && (
+            {user.id === profile._id && (
               <Button variant="contained" sx={{ ml: 'auto' }} onClick={handleOpen}>
                 Edit Profile
               </Button>

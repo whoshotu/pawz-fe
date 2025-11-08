@@ -28,7 +28,7 @@ function App() {
                 <Button color="inherit" component={Link} to="/services">
                   Services
                 </Button>
-                <Button color="inherit" component={Link} to={`/profile/${user._id}`}>
+                <Button color="inherit" component={Link} to={`/profile/${user.id}`}>
                   My Profile
                 </Button>
                 <Typography sx={{ mr: 2 }}>
