@@ -12,7 +12,7 @@ export const PostProvider = ({ children }) => {
     try {
       setLoading(true);
       const res = await api.get('/posts');
-      setPosts(res.data.posts);
+      setPosts(res.data || []);
       setError(null);
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred while fetching posts.');

@@ -1,12 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PetContext } from '../context/PetContext';
-import { Grid, Card, CardContent, CardActions, Button, Typography, CircularProgress, Box } from '@mui/material';
+import { Grid, Card, CardContent, CardActions, Button, Typography, CircularProgress, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import PetModal from './PetModal';
 
 const Pets = () => {
   const { pets, loading, error, fetchPets, deletePet } = useContext(PetContext);
   const [open, setOpen] = useState(false);
   const [selectedPet, setSelectedPet] = useState(null);
+  const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
+  const [petToDelete, setPetToDelete] = useState(null);
+
 
   useEffect(() => {
     fetchPets();
@@ -22,10 +25,19 @@ const Pets = () => {
     setOpen(false);
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this pet?')) {
-      deletePet(id);
-    }
+  const handleOpenDeleteConfirm = (pet) => {
+    setPetToDelete(pet);
+    setOpenDeleteConfirm(true);
+  };
+
+  const handleCloseDeleteConfirm = () => {
+    setPetToDelete(null);
+    setOpenDeleteConfirm(false);
+  };
+
+  const handleDelete = () => {
+    deletePet(petToDelete._id);
+    handleCloseDeleteConfirm();
   };
 
   if (loading) {
@@ -38,7 +50,7 @@ const Pets = () => {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2, color: 'secondary.main' }}>
         <Typography variant="h5" component="h2">
           Your Pets
         </Typography>
@@ -62,7 +74,7 @@ const Pets = () => {
                   <Button size="small" color="primary" onClick={() => handleOpen(pet)}>
                     Edit
                   </Button>
-                  <Button size="small" color="secondary" onClick={() => handleDelete(pet._id)}>
+                  <Button size="small" color="secondary" onClick={() => handleOpenDeleteConfirm(pet)}>
                     Delete
                   </Button>
                 </CardActions>
@@ -72,6 +84,21 @@ const Pets = () => {
         </Grid>
       )}
       <PetModal open={open} handleClose={handleClose} pet={selectedPet} />
+      <Dialog
+        open={openDeleteConfirm}
+        onClose={handleCloseDeleteConfirm}
+      >
+        <DialogTitle>{"Delete Pet?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete {petToDelete?.name}? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDeleteConfirm}>Cancel</Button>
+          <Button onClick={handleDelete} color="secondary" autoFocus>Delete</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
