@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api'; // Import api from utils
-import { Button, TextField, Container, Typography, Box, InputAdornment, IconButton, Alert } from '@mui/material';
+import { Button, TextField, Container, Typography, Box, InputAdornment, IconButton, Alert, CircularProgress } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
 
@@ -13,6 +13,7 @@ const Register = () => {
   });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState('');
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -21,8 +22,8 @@ const Register = () => {
 
   const validate = () => {
     let tempErrors = {};
-    tempErrors.name = name ? "" : "Name is required.";
-    tempErrors.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid.";
+    tempErrors.name = name.trim() ? "" : "Name is required.";
+    tempErrors.email = /^$|.+@.+\..+/.test(email) ? "" : "Email is not valid.";
     tempErrors.password = password.length >= 6 ? "" : "Password must be at least 6 characters long.";
     setErrors(tempErrors);
     return Object.values(tempErrors).every(x => x === "");
@@ -38,6 +39,7 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (validate()) {
       try {
         const newUser = {
@@ -84,6 +86,8 @@ const Register = () => {
         }
       }
     }
+    // If validation fails, we should also stop loading.
+    setLoading(false);
   };
 
   const handleClickShowPassword = () => {
@@ -165,9 +169,10 @@ const Register = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, position: 'relative' }}
+            disabled={loading}
           >
-            Sign Up
+            {loading ? <CircularProgress size={24} color="inherit" sx={{ position: 'absolute' }} /> : 'Sign Up'}
           </Button>
         </Box>
       </Box>

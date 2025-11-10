@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PetContext } from '../context/PetContext';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import { TextField, Button, Box, Typography, CircularProgress } from '@mui/material';
 
 const PetForm = ({ pet, handleClose }) => {
   const { addPet, updatePet, error } = useContext(PetContext);
   const [name, setName] = useState('');
   const [breed, setBreed] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (pet) {
@@ -22,6 +23,7 @@ const PetForm = ({ pet, handleClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       if (pet) {
         await updatePet(pet._id, { name, breed, dateOfBirth });
@@ -31,6 +33,8 @@ const PetForm = ({ pet, handleClose }) => {
       handleClose();
     } catch (err) {
       // Error is already handled in PetContext
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,8 +69,8 @@ const PetForm = ({ pet, handleClose }) => {
           shrink: true,
         }}
       />
-      <Button type="submit" variant="contained" color="primary">
-        {pet ? 'Update Pet' : 'Add Pet'}
+      <Button type="submit" variant="contained" color="primary" disabled={loading}>
+        {loading ? <CircularProgress size={24} color="inherit" /> : (pet ? 'Update Pet' : 'Add Pet')}
       </Button>
     </Box>
   );

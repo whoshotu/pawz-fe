@@ -1,10 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { ServiceContext } from '../context/ServiceProvider';
 import Service from './Service';
-import { CircularProgress, Typography, Box } from '@mui/material';
+import { CircularProgress, Typography, Box, TextField } from '@mui/material';
 
 const ServiceList = () => {
   const { services, loading, error, fetchServices } = useContext(ServiceContext);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchServices();
@@ -18,15 +19,26 @@ const ServiceList = () => {
     return <Typography color="error">{error}</Typography>;
   }
 
+  const filteredServices = services.filter((service) =>
+    service.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
         Services
       </Typography>
-      {services.length === 0 ? (
+      <TextField
+        label="Search Services"
+        variant="outlined"
+        fullWidth
+        sx={{ mb: 2 }}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      {filteredServices.length === 0 ? (
         <Typography>No services found.</Typography>
       ) : (
-        services.map((service) => <Service key={service._id} service={service} />)
+        filteredServices.map((service) => <Service key={service.place_id} service={service} />)
       )}
     </Box>
   );

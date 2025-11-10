@@ -6,13 +6,10 @@ import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
 import ServiceList from './components/ServiceList';
 import { useAuth } from './context/AuthContext';
-import { PetProvider } from './context/PetContext';
-import { PostProvider } from './context/PostContext';
-import { ProfileProvider } from './context/ProfileContext';
-import { ServiceProvider } from './context/ServiceProvider';
 import { AppBar, Toolbar, Typography, Container, Box, Button } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
+import AppProviders from './context/AppProviders';
 
 function App() {
   const { user, logout } = useAuth();
@@ -49,22 +46,16 @@ function App() {
           </AppBar>
           <Container>
             <Box sx={{ mt: 4 }}>
-              <ServiceProvider>
-                <ProfileProvider>
-                  <PostProvider>
-                    <PetProvider>
-                      <Routes>
-                        <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
-                        <Route path="/register" element={user ? <Navigate to="/dashboard" /> : <Register />} />
-                        <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
-                        <Route path="/profile/:id" element={user ? <Profile /> : <Navigate to="/login" />} />
-                        <Route path="/services" element={user ? <ServiceList /> : <Navigate to="/login" />} />
-                        <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
-                      </Routes>
-                    </PetProvider>
-                  </PostProvider>
-                </ProfileProvider>
-              </ServiceProvider>
+              <AppProviders>
+                <Routes>
+                  <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
+                  <Route path="/register" element={user ? <Navigate to="/dashboard" /> : <Register />} />
+                  <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+                  <Route path="/profile/:id" element={user ? <Profile /> : <Navigate to="/login" />} />
+                  <Route path="/services" element={user ? <ServiceList /> : <Navigate to="/login" />} />
+                  <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+                </Routes>
+              </AppProviders>
             </Box>
           </Container>
         </div>

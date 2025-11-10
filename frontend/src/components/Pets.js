@@ -40,14 +40,6 @@ const Pets = () => {
     handleCloseDeleteConfirm();
   };
 
-  if (loading) {
-    return <CircularProgress />;
-  }
-
-  if (error) {
-    return <Typography color="error">{error}</Typography>;
-  }
-
   return (
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2, color: 'secondary.main' }}>
@@ -58,7 +50,13 @@ const Pets = () => {
           Add Pet
         </Button>
       </Box>
-      {pets.length === 0 ? (
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+          <CircularProgress />
+        </Box>
+      ) : error ? (
+        <Typography color="error">{error}</Typography>
+      ) : pets.length === 0 ? (
         <Typography>You haven't added any pets yet.</Typography>
       ) : (
         <Grid container spacing={2}>

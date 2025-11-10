@@ -35,7 +35,7 @@ export const PetProvider = ({ children }) => {
   const updatePet = async (id, petData) => {
     try {
       const res = await api.put(`/pets/${id}`, petData);
-      setPets(pets.map(pet => (pet.id === id ? res.data : pet)));
+      setPets(pets.map(pet => (pet._id === id ? res.data : pet)));
       return res.data;
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred while updating the pet.');

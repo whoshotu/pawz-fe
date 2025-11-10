@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
-import { Button, TextField, Container, Typography, Box, InputAdornment, IconButton, Alert } from '@mui/material';
+import { Button, TextField, Container, Typography, Box, InputAdornment, IconButton, Alert, CircularProgress } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
 
@@ -12,6 +12,7 @@ const Login = () => {
   });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState('');
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -20,7 +21,7 @@ const Login = () => {
 
   const validate = () => {
     let tempErrors = {};
-    tempErrors.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid.";
+    tempErrors.email = /^$|.+@.+\..+/.test(email) ? "" : "Email is not valid.";
     tempErrors.password = password ? "" : "Password is required.";
     setErrors(tempErrors);
     return Object.values(tempErrors).every(x => x === "");
@@ -36,6 +37,7 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (validate()) {
       try {
         const res = await api.post('/auth/token?grant_type=password', {
@@ -57,6 +59,8 @@ const Login = () => {
         }
       }
     }
+    // If validation fails, we should also stop loading.
+    setLoading(false);
   };
 
   const handleClickShowPassword = () => {
@@ -126,9 +130,10 @@ const Login = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, position: 'relative' }}
+            disabled={loading}
           >
-            Sign In
+            {loading ? <CircularProgress size={24} color="inherit" sx={{ position: 'absolute' }} /> : 'Sign In'}
           </Button>
         </Box>
       </Box>
