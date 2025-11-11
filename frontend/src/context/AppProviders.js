@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthProvider } from './AuthContext';
 import { PetProvider } from './PetContext';
 import { PostProvider } from './PostContext';
 import { ProfileProvider } from './ProfileContext';
@@ -6,15 +7,17 @@ import { ServiceProvider } from './ServiceProvider';
 
 const AppProviders = ({ children }) => {
   return (
-    <ServiceProvider>
+    <AuthProvider>
       <ProfileProvider>
         <PostProvider>
           <PetProvider>
-            {children}
+            <ServiceProvider>
+              {children}
+            </ServiceProvider>
           </PetProvider>
         </PostProvider>
       </ProfileProvider>
-    </ServiceProvider>
+    </AuthProvider>
   );
 };
 

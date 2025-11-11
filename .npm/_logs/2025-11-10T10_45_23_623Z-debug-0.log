@@ -1,0 +1,18 @@
+0 verbose cli /usr/bin/node /usr/bin/npm
+1 info using npm@11.6.2
+2 info using node@v25.1.0
+3 silly config load:file:/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/home/anthony/pawz-fe/.npmrc
+5 silly config load:file:/home/anthony/.npmrc
+6 silly config load:file:/etc/npmrc
+7 verbose title npm build
+8 verbose argv "build"
+9 verbose logfile logs-max:10 dir:/home/anthony/.npm/_logs/2025-11-10T10_45_23_623Z-
+10 verbose logfile /home/anthony/.npm/_logs/2025-11-10T10_45_23_623Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 verbose cwd /home/anthony/pawz-fe
+13 verbose os Linux 6.17.7-3-cachyos
+14 verbose node v25.1.0
+15 verbose npm  v11.6.2
+16 verbose exit 1
+17 verbose code 1

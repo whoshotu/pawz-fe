@@ -1,0 +1,42 @@
+0 verbose cli /usr/bin/node /usr/bin/npm
+1 info using npm@11.6.2
+2 info using node@v25.1.0
+3 silly config load:file:/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/home/anthony/.npmrc
+5 silly config load:file:/etc/npmrc
+6 verbose title npm install gemini/cli
+7 verbose argv "install" "gemini/cli"
+8 verbose logfile logs-max:10 dir:/home/anthony/.npm/_logs/2025-11-10T13_02_51_448Z-
+9 verbose logfile /home/anthony/.npm/_logs/2025-11-10T13_02_51_448Z-debug-0.log
+10 silly logfile start cleaning logs, removing 1 files
+11 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+12 silly logfile done cleaning log files
+13 verbose stack Error: An unknown git error occurred
+13 verbose stack     at makeError (/usr/lib/node_modules/npm/node_modules/@npmcli/git/lib/make-error.js:28:13)
+13 verbose stack     at /usr/lib/node_modules/npm/node_modules/@npmcli/git/lib/spawn.js:37:26
+13 verbose stack     at async module.exports (/usr/lib/node_modules/npm/node_modules/@npmcli/git/lib/revs.js:18:22)
+13 verbose stack     at async /usr/lib/node_modules/npm/node_modules/pacote/lib/git.js:258:19
+13 verbose stack     at async withTempDir (/usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/with-temp-dir.js:21:14)
+13 verbose stack     at async /usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:539:22
+13 verbose stack     at async Promise.all (index 0)
+13 verbose stack     at async #add (/usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:528:5)
+13 verbose stack     at async #applyUserRequestsToNode (/usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:497:7)
+13 verbose stack     at async #applyUserRequests (/usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:433:7)
+14 error code 128
+15 error An unknown git error occurred
+16 error command git --no-replace-objects ls-remote ssh://git@github.com/gemini/cli.git
+17 error ERROR: Repository not found.
+17 error fatal: Could not read from remote repository.
+17 error
+17 error Please make sure you have the correct access rights
+17 error and the repository exists.
+18 silly unfinished npm timer reify 1762779771876
+19 silly unfinished npm timer reify:loadTrees 1762779771878
+20 silly unfinished npm timer idealTree:userRequests 1762779771888
+21 verbose cwd /home/anthony
+22 verbose os Linux 6.17.7-3-cachyos
+23 verbose node v25.1.0
+24 verbose npm  v11.6.2
+25 verbose exit 128
+26 verbose code 128
+27 error A complete log of this run can be found in: /home/anthony/.npm/_logs/2025-11-10T13_02_51_448Z-debug-0.log

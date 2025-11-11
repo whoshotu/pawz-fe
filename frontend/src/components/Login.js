@@ -37,8 +37,8 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     if (validate()) {
+      setLoading(true);
       try {
         const res = await api.post('/auth/token?grant_type=password', {
           email,
@@ -57,10 +57,10 @@ const Login = () => {
           console.error('Error', err.message);
           setServerError('An error occurred. Please try again later.');
         }
+      } finally {
+        setLoading(false);
       }
     }
-    // If validation fails, we should also stop loading.
-    setLoading(false);
   };
 
   const handleClickShowPassword = () => {

@@ -1,6 +1,10 @@
 {
     "recommendations": [
-        "google.gemini-cli-vscode-ide-companion",
-        "google.geminicodeassist"
+        "google.geminicodeassist",
+        "komiyamma.commit-message-gene-by-gemini-cli",
+        "ms-python.vscode-python-envs",
+        "ms-python.python",
+        "ms-python.debugpy",
+        "mgesbert.python-path"
     ]
 }

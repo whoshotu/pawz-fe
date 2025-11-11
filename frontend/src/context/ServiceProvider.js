@@ -15,7 +15,7 @@ export const ServiceProvider = ({ children }) => {
         async (position) => {
           const { latitude, longitude } = position.coords;
           try {
-            const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY'; // TODO: Replace with your actual API key
+            const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
             const searchRadius = 5000; // 5km
 
             const searches = [

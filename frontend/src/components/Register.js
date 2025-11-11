@@ -39,8 +39,8 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     if (validate()) {
+      setLoading(true);
       try {
         const newUser = {
           email,
@@ -84,10 +84,10 @@ const Register = () => {
           console.error('Error', err.message);
           setServerError('An error occurred. Please try again later.');
         }
+      } finally {
+        setLoading(false);
       }
     }
-    // If validation fails, we should also stop loading.
-    setLoading(false);
   };
 
   const handleClickShowPassword = () => {

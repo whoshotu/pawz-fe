@@ -1,0 +1,40 @@
+0 verbose cli /usr/bin/node /usr/bin/npm
+1 info using npm@11.6.2
+2 info using node@v25.1.0
+3 silly config load:file:/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/home/anthony/pawz-fe/.npmrc
+5 silly config load:file:/home/anthony/.npmrc
+6 silly config load:file:/etc/npmrc
+7 verbose title npm install
+8 verbose argv "install"
+9 verbose logfile logs-max:10 dir:/home/anthony/.npm/_logs/2025-11-11T07_47_14_840Z-
+10 verbose logfile /home/anthony/.npm/_logs/2025-11-11T07_47_14_840Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly reify moves {}
+16 verbose stack Error: Could not read package.json: Error: ENOENT: no such file or directory, open '/home/anthony/pawz-fe/package.json'
+16 verbose stack     at async open (node:internal/fs/promises:641:25)
+16 verbose stack     at async readFile (node:internal/fs/promises:1279:14)
+16 verbose stack     at async read (/usr/lib/node_modules/npm/node_modules/@npmcli/package-json/lib/read-package.js:9:18)
+16 verbose stack     at async PackageJson.load (/usr/lib/node_modules/npm/node_modules/@npmcli/package-json/lib/index.js:131:31)
+16 verbose stack     at async PackageJson.normalize (/usr/lib/node_modules/npm/node_modules/@npmcli/package-json/lib/index.js:117:5)
+16 verbose stack     at async runScript (/usr/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/run-script.js:11:28)
+16 verbose stack     at async Install.exec (/usr/lib/node_modules/npm/lib/commands/install.js:163:9)
+16 verbose stack     at async Npm.exec (/usr/lib/node_modules/npm/lib/npm.js:208:9)
+16 verbose stack     at async module.exports (/usr/lib/node_modules/npm/lib/cli/entry.js:67:5)
+17 error code ENOENT
+18 error syscall open
+19 error path /home/anthony/pawz-fe/package.json
+20 error errno -2
+21 error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/anthony/pawz-fe/package.json'
+22 error enoent This is related to npm not being able to find a file.
+22 error enoent
+23 verbose cwd /home/anthony/pawz-fe
+24 verbose os Linux 6.17.7-3-cachyos
+25 verbose node v25.1.0
+26 verbose npm  v11.6.2
+27 verbose exit -2
+28 verbose code -2
+29 error A complete log of this run can be found in: /home/anthony/.npm/_logs/2025-11-11T07_47_14_840Z-debug-0.log

@@ -8,10 +8,7 @@ const Feed = () => {
   const { posts, loading, error, fetchPosts } = useContext(PostContext);
 
   useEffect(() => {
-    // Fetch posts only if they haven't been loaded yet.
-    if (posts.length === 0) {
-      fetchPosts();
-    }
+    fetchPosts();
   }, [fetchPosts]);
 
   // Show a loading spinner only on the initial load when there are no posts.
