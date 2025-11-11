@@ -12,7 +12,6 @@ import theme from './theme';
 import AppProviders from './context/AppProviders';
 
 function App() {
-  const { user, logout } = useAuth();
   return (
     <ThemeProvider theme={theme}>
       <Router>

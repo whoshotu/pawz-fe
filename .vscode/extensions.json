@@ -5,6 +5,9 @@
         "ms-python.vscode-python-envs",
         "ms-python.python",
         "ms-python.debugpy",
-        "mgesbert.python-path"
+        "mgesbert.python-path",
+        "google.gemini-cli-vscode-ide-companion",
+        "github.vscode-github-actions",
+        "google-workspace.google-workspace-developer-tools"
     ]
 }
