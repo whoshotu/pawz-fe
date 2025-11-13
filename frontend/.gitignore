@@ -17,6 +17,3 @@
 .env.development.local
 .env.test.local
 .env.production.local
-
-# Ignore the ServiceProvider context as requested
-src/context/ServiceProvider.js
